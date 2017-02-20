@@ -41,7 +41,6 @@ public class CreateTemplate extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         nameTextField = new javax.swing.JTextField();
-        detailTextField = new javax.swing.JTextField();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
@@ -49,25 +48,27 @@ public class CreateTemplate extends javax.swing.JDialog {
         saveButton = new javax.swing.JButton();
         clearButton = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtDetail = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(169, 204, 227));
+        jPanel1.setBackground(new java.awt.Color(0, 103, 127));
 
-        createSubPanel.setBackground(new java.awt.Color(169, 204, 227));
-        createSubPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Template", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 0, 12), new java.awt.Color(46, 134, 193))); // NOI18N
+        createSubPanel.setBackground(new java.awt.Color(0, 146, 188));
+        createSubPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Template", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("NAME :");
 
         jLabel2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("DETAILS :");
 
+        nameTextField.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         nameTextField.setText(" ");
         nameTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 153), 1, true));
-
-        detailTextField.setText(" ");
-        detailTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 153), 1, true));
 
         jCheckBox1.setBackground(new java.awt.Color(169, 204, 227));
         jCheckBox1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -85,45 +86,50 @@ public class CreateTemplate extends javax.swing.JDialog {
         jCheckBox4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jCheckBox4.setText("IS ");
 
-        saveButton.setBackground(new java.awt.Color(36, 113, 163));
+        saveButton.setBackground(new java.awt.Color(85, 123, 151));
         saveButton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/Device-Floppy-icon.png"))); // NOI18N
         saveButton.setText("SAVE ");
-        saveButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(46, 134, 193), 1, true));
+        saveButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 134, 193)));
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveButtonActionPerformed(evt);
             }
         });
 
-        clearButton.setBackground(new java.awt.Color(36, 113, 163));
+        clearButton.setBackground(new java.awt.Color(85, 123, 151));
         clearButton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         clearButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/refresh-icon.png"))); // NOI18N
         clearButton.setText("CLEAR");
-        clearButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(46, 134, 193), 1, true));
+        clearButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 134, 193)));
         clearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clearButtonActionPerformed(evt);
             }
         });
 
-        btnClose.setBackground(new java.awt.Color(36, 113, 163));
+        btnClose.setBackground(new java.awt.Color(85, 123, 151));
         btnClose.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/refresh-icon.png"))); // NOI18N
         btnClose.setText("CLOSE");
-        btnClose.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(46, 134, 193), 1, true));
+        btnClose.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 134, 193)));
         btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCloseActionPerformed(evt);
             }
         });
 
+        txtDetail.setColumns(20);
+        txtDetail.setRows(5);
+        txtDetail.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 153), 1, true));
+        jScrollPane1.setViewportView(txtDetail);
+
         javax.swing.GroupLayout createSubPanelLayout = new javax.swing.GroupLayout(createSubPanel);
         createSubPanel.setLayout(createSubPanelLayout);
         createSubPanelLayout.setHorizontalGroup(
             createSubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(createSubPanelLayout.createSequentialGroup()
-                .addGap(0, 21, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(createSubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createSubPanelLayout.createSequentialGroup()
                         .addGroup(createSubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,8 +137,8 @@ public class CreateTemplate extends javax.swing.JDialog {
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(createSubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(detailTextField)
-                            .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(nameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createSubPanelLayout.createSequentialGroup()
                         .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(21, 21, 21)
@@ -152,15 +158,19 @@ public class CreateTemplate extends javax.swing.JDialog {
         createSubPanelLayout.setVerticalGroup(
             createSubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(createSubPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(createSubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(createSubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(detailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(createSubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(createSubPanelLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(createSubPanelLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(createSubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBox2)
                     .addComponent(jCheckBox1)
@@ -171,7 +181,7 @@ public class CreateTemplate extends javax.swing.JDialog {
                     .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(6, 6, 6))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -210,7 +220,7 @@ public class CreateTemplate extends javax.swing.JDialog {
             // TODO add your handling code here:
             Createcontact createdetail = new Createcontact();
             createdetail.setName(nameTextField.getText());
-            createdetail.setDetails(detailTextField.getText());
+            createdetail.setDetails(txtDetail.getText());
             SuperConnection.saveEntity(createdetail);
             JOptionPane.showMessageDialog(this, "SAVED SUCCESSFULLY.");
         } catch (Exception ex) {
@@ -281,7 +291,6 @@ public class CreateTemplate extends javax.swing.JDialog {
     private javax.swing.JButton btnClose;
     private javax.swing.JButton clearButton;
     private javax.swing.JPanel createSubPanel;
-    private javax.swing.JTextField detailTextField;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -289,7 +298,9 @@ public class CreateTemplate extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JButton saveButton;
+    private javax.swing.JTextArea txtDetail;
     // End of variables declaration//GEN-END:variables
 }

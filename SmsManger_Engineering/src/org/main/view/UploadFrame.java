@@ -49,14 +49,13 @@ public class UploadFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("UPLOAD FILE");
 
-        jPanel1.setBackground(new java.awt.Color(135, 206, 250));
+        jPanel1.setBackground(new java.awt.Color(0, 103, 127));
 
-        jPanel2.setBackground(new java.awt.Color(135, 206, 250));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "UPLOAD FILE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 0, 12), new java.awt.Color(46, 134, 193))); // NOI18N
+        jPanel2.setBackground(new java.awt.Color(0, 146, 188));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "UPLOAD FILE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
 
         btnBrowser.setBackground(new java.awt.Color(36, 113, 163));
-        btnBrowser.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
-        btnBrowser.setForeground(java.awt.Color.white);
+        btnBrowser.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         btnBrowser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/Google-Currents-icon.png"))); // NOI18N
         btnBrowser.setText("BROWSER");
         btnBrowser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 134, 193)));
@@ -67,8 +66,7 @@ public class UploadFrame extends javax.swing.JFrame {
         });
 
         btnUpload.setBackground(new java.awt.Color(36, 113, 163));
-        btnUpload.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
-        btnUpload.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpload.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         btnUpload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/Upload-Folder-Blue-icon.png"))); // NOI18N
         btnUpload.setText("UPLOAD");
         btnUpload.addActionListener(new java.awt.event.ActionListener() {
@@ -78,8 +76,7 @@ public class UploadFrame extends javax.swing.JFrame {
         });
 
         buttonReset.setBackground(new java.awt.Color(36, 113, 163));
-        buttonReset.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
-        buttonReset.setForeground(new java.awt.Color(255, 255, 255));
+        buttonReset.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         buttonReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/refresh-icon.png"))); // NOI18N
         buttonReset.setText("RESET");
         buttonReset.addActionListener(new java.awt.event.ActionListener() {
@@ -110,7 +107,7 @@ public class UploadFrame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBrowser, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonReset, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))

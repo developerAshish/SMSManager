@@ -37,8 +37,8 @@ public class SplashScreen extends javax.swing.JDialog implements ActionListener 
         setUndecorated(true);
         setResizable(false);
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Sylfaen", 2, 24)); // NOI18N
+        jLabel1.setBackground(new java.awt.Color(0, 103, 127));
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("WELCOME TO SMS MARKETING");
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));

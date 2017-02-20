@@ -76,56 +76,63 @@ public class MainFrame extends javax.swing.JFrame {
         buttonReset = new javax.swing.JButton();
         searchButton = new javax.swing.JButton();
         createButton = new javax.swing.JButton();
-        txtSearch = new javax.swing.JTextField();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        btnReload = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SMS MANAGER FOR ENGINEERING STUDENTS");
         setBackground(new java.awt.Color(255, 237, 204));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(169, 204, 227));
+        jPanel1.setBackground(new java.awt.Color(0, 103, 127));
 
-        jPanel2.setBackground(new java.awt.Color(169, 204, 227));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SMS MANAGER FOR ENGINEERING STUDENTS", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Verdana", 0, 12), new java.awt.Color(46, 134, 193))); // NOI18N
+        jPanel2.setBackground(new java.awt.Color(0, 146, 188));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SMS MANAGER ", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Verdana", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        panelMain.setBackground(new java.awt.Color(169, 204, 227));
-        panelMain.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(33, 97, 140), 1, true));
+        panelMain.setBackground(new java.awt.Color(0, 107, 166));
+        panelMain.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(74, 69, 104), 1, true));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("NAME :");
 
         jLabel2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("BRANCH :");
 
         txtName.setText(" ");
-        txtName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 153)));
+        txtName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(74, 69, 104)));
 
         txtBranch.setText(" ");
-        txtBranch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 153)));
+        txtBranch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(74, 69, 104)));
 
         jLabel5.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("YEAR :");
 
         txtYear.setText(" ");
-        txtYear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 153)));
+        txtYear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(74, 69, 104)));
 
         jLabel6.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel6.setText("COLLAGE :");
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("COLLEGE :");
 
         txtCollege.setText(" ");
-        txtCollege.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 153)));
+        txtCollege.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(74, 69, 104)));
 
         jLabel7.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("EMAIL-ID :");
 
         txtEmailID.setText(" ");
-        txtEmailID.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 153)));
+        txtEmailID.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(74, 69, 104)));
 
         jLabel8.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("CONTACT :");
 
         txtContact.setText(" ");
-        txtContact.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 153)));
+        txtContact.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(74, 69, 104)));
 
         javax.swing.GroupLayout panelMainLayout = new javax.swing.GroupLayout(panelMain);
         panelMain.setLayout(panelMainLayout);
@@ -180,14 +187,15 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        Panelsub.setBackground(new java.awt.Color(169, 204, 227));
-        Panelsub.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(33, 97, 140), 1, true));
+        Panelsub.setBackground(new java.awt.Color(0, 107, 166));
+        Panelsub.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(74, 69, 104), 1, true));
 
         cmbTemplate.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         cmbTemplate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
         cmbTemplate.setOpaque(false);
 
         jLabel3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("CHOOSE TEMPLATE :-");
 
         javax.swing.GroupLayout PanelsubLayout = new javax.swing.GroupLayout(Panelsub);
@@ -211,6 +219,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(16, 16, 16))
         );
 
+        jScrollPane1.setBackground(new java.awt.Color(144, 12, 63));
+
         viewTable.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(33, 97, 140), 1, true));
         viewTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -225,62 +235,65 @@ public class MainFrame extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(viewTable);
 
-        sendButton.setBackground(new java.awt.Color(36, 113, 163));
-        sendButton.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
-        sendButton.setForeground(java.awt.Color.white);
+        sendButton.setBackground(new java.awt.Color(124, 133, 149));
+        sendButton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         sendButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/blue-mail-send-icon.png"))); // NOI18N
         sendButton.setText("SEND");
-        sendButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(46, 134, 193), 1, true));
+        sendButton.setBorder(null);
         sendButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sendButtonActionPerformed(evt);
             }
         });
 
-        saveButton.setBackground(new java.awt.Color(36, 113, 163));
-        saveButton.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
-        saveButton.setForeground(java.awt.Color.white);
+        saveButton.setBackground(new java.awt.Color(124, 133, 149));
+        saveButton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/Device-Floppy-icon.png"))); // NOI18N
         saveButton.setText("SAVE");
-        saveButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(46, 134, 193), 1, true));
+        saveButton.setBorder(null);
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveButtonActionPerformed(evt);
             }
         });
 
-        buttonReset.setBackground(new java.awt.Color(36, 113, 163));
-        buttonReset.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
-        buttonReset.setForeground(java.awt.Color.white);
+        buttonReset.setBackground(new java.awt.Color(124, 133, 149));
+        buttonReset.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         buttonReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/refresh-icon.png"))); // NOI18N
         buttonReset.setText("RESET");
-        buttonReset.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(46, 134, 193), 1, true));
+        buttonReset.setBorder(null);
         buttonReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonResetActionPerformed(evt);
             }
         });
 
-        searchButton.setBackground(new java.awt.Color(36, 113, 163));
-        searchButton.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
-        searchButton.setForeground(java.awt.Color.white);
+        searchButton.setBackground(new java.awt.Color(124, 133, 149));
+        searchButton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/search.png"))); // NOI18N
         searchButton.setText("SEARCH");
-        searchButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(46, 134, 193), 1, true));
+        searchButton.setBorder(null);
 
-        createButton.setBackground(new java.awt.Color(36, 113, 163));
-        createButton.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
-        createButton.setForeground(java.awt.Color.white);
+        createButton.setBackground(new java.awt.Color(124, 133, 149));
+        createButton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         createButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/Actions-contact-new-icon.png"))); // NOI18N
         createButton.setText("CREATE");
-        createButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(46, 134, 193), 1, true));
+        createButton.setBorder(null);
         createButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createButtonActionPerformed(evt);
             }
         });
 
-        txtSearch.setText(" ");
+        btnReload.setBackground(new java.awt.Color(124, 133, 149));
+        btnReload.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        btnReload.setText("RELOAD");
+        btnReload.setBorder(null);
+        btnReload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReloadActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -288,16 +301,17 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtSearch)
-                    .addComponent(Panelsub, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1))
+                    .addComponent(Panelsub, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnReload, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,13 +333,17 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(Panelsub, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonReset, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(createButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonReset, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(createButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(sendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(8, 8, 8)
+                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnReload, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -411,13 +429,19 @@ public class MainFrame extends javax.swing.JFrame {
             Createcontact selectedItem = (Createcontact) cmbTemplate.getSelectedItem();
             System.out.println("selectedItem = " + selectedItem.getName());
             
-            SendSMS.send("7416363492", selectedItem.getDetails());
+            SendSMS.send(txtContact.getText().trim(), selectedItem.getDetails());
             
             JOptionPane.showMessageDialog(this, "SENT SUCCESSFULLY.");
         } catch (Exception ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_sendButtonActionPerformed
+
+    private void btnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadActionPerformed
+        // TODO add your handling code here:
+        loadCombo();
+        viewTableModel();
+    }//GEN-LAST:event_btnReloadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -457,6 +481,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panelsub;
+    private javax.swing.JButton btnReload;
     private javax.swing.JButton buttonReset;
     private javax.swing.JComboBox<String> cmbTemplate;
     private javax.swing.JButton createButton;
@@ -469,6 +494,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelMain;
     private javax.swing.JButton saveButton;
@@ -479,7 +505,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtContact;
     private javax.swing.JTextField txtEmailID;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtYear;
     private javax.swing.JTable viewTable;
     // End of variables declaration//GEN-END:variables

@@ -27,15 +27,17 @@ public class LoginFrame extends javax.swing.JFrame {
         setTitle("Login Window");
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(169, 204, 227));
+        jPanel1.setBackground(new java.awt.Color(0, 103, 127));
 
-        jPanel3.setBackground(new java.awt.Color(169, 204, 227));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "TITLE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 0, 12), new java.awt.Color(46, 134, 193))); // NOI18N
+        jPanel3.setBackground(new java.awt.Color(0, 146, 188));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "TITLE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("User Name ");
 
         jLabel2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Password ");
 
         txtUsername.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -43,13 +45,13 @@ public class LoginFrame extends javax.swing.JFrame {
 
         txtPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 153)));
 
-        btnLogin.setBackground(new java.awt.Color(36, 113, 163));
-        btnLogin.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
-        btnLogin.setForeground(java.awt.Color.white);
+        btnLogin.setBackground(new java.awt.Color(85, 123, 151));
+        btnLogin.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        btnLogin.setForeground(new java.awt.Color(255, 255, 255));
         btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/login.png"))); // NOI18N
         btnLogin.setText("Login");
         btnLogin.setToolTipText("");
-        btnLogin.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(46, 134, 193), 1, true));
+        btnLogin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(85, 123, 151)));
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
@@ -118,7 +120,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(415, 199));
+        setSize(new java.awt.Dimension(421, 206));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
