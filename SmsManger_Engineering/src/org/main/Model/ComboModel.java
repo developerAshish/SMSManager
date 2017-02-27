@@ -27,13 +27,19 @@ public class ComboModel implements ComboBoxModel {
     @Override
     public void setSelectedItem(Object anItem) {
         for (Createcontact org : orgs) {
-            selectedString = org.getName();
-            selectedItem = org;
+            if (org.getName().equals((String)anItem)) {
+                selectedString = org.getName();
+                selectedItem = org;
+            }
         }
     }
 
     @Override
-    public Createcontact getSelectedItem() {
+    public String getSelectedItem() {
+        return selectedString;
+    }
+
+    public Createcontact getSelectedObjectItem() {
         return selectedItem;
     }
 
@@ -58,7 +64,7 @@ public class ComboModel implements ComboBoxModel {
     public void removeListDataListener(ListDataListener l) {
     }
 
-    public String tostring() {
+    public String toCmbName() {
         return selectedString;
     }
 }

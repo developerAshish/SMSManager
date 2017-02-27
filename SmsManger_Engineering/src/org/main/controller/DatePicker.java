@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.main.controller;
+package org.main.controller;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

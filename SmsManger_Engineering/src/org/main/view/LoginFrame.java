@@ -48,7 +48,7 @@ public class LoginFrame extends javax.swing.JFrame {
         btnLogin.setBackground(new java.awt.Color(85, 123, 151));
         btnLogin.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(255, 255, 255));
-        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/login.png"))); // NOI18N
+        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/login-icon.png"))); // NOI18N
         btnLogin.setText("Login");
         btnLogin.setToolTipText("");
         btnLogin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(85, 123, 151)));

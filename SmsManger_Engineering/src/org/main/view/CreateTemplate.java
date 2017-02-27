@@ -70,25 +70,25 @@ public class CreateTemplate extends javax.swing.JDialog {
         nameTextField.setText(" ");
         nameTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 153), 1, true));
 
-        jCheckBox1.setBackground(new java.awt.Color(169, 204, 227));
+        jCheckBox1.setBackground(new java.awt.Color(0, 146, 188));
         jCheckBox1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jCheckBox1.setText("IS OCCUSION");
 
-        jCheckBox2.setBackground(new java.awt.Color(169, 204, 227));
+        jCheckBox2.setBackground(new java.awt.Color(0, 146, 188));
         jCheckBox2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jCheckBox2.setText("IS PROMISE");
 
-        jCheckBox3.setBackground(new java.awt.Color(169, 204, 227));
+        jCheckBox3.setBackground(new java.awt.Color(0, 146, 188));
         jCheckBox3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jCheckBox3.setText("IS THANK");
 
-        jCheckBox4.setBackground(new java.awt.Color(169, 204, 227));
+        jCheckBox4.setBackground(new java.awt.Color(0, 146, 188));
         jCheckBox4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jCheckBox4.setText("IS ");
 
         saveButton.setBackground(new java.awt.Color(85, 123, 151));
         saveButton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/Device-Floppy-icon.png"))); // NOI18N
+        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/E-mail-icon.png"))); // NOI18N
         saveButton.setText("SAVE ");
         saveButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 134, 193)));
         saveButton.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +99,7 @@ public class CreateTemplate extends javax.swing.JDialog {
 
         clearButton.setBackground(new java.awt.Color(85, 123, 151));
         clearButton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        clearButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/refresh-icon.png"))); // NOI18N
+        clearButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/Clear-icon.png"))); // NOI18N
         clearButton.setText("CLEAR");
         clearButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 134, 193)));
         clearButton.addActionListener(new java.awt.event.ActionListener() {
@@ -110,7 +110,7 @@ public class CreateTemplate extends javax.swing.JDialog {
 
         btnClose.setBackground(new java.awt.Color(85, 123, 151));
         btnClose.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/refresh-icon.png"))); // NOI18N
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/Delete-icon.png"))); // NOI18N
         btnClose.setText("CLOSE");
         btnClose.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 134, 193)));
         btnClose.addActionListener(new java.awt.event.ActionListener() {
@@ -176,12 +176,11 @@ public class CreateTemplate extends javax.swing.JDialog {
                     .addComponent(jCheckBox1)
                     .addComponent(jCheckBox3)
                     .addComponent(jCheckBox4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(13, 13, 13)
                 .addGroup(createSubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6))
+                    .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -218,11 +217,16 @@ public class CreateTemplate extends javax.swing.JDialog {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         try {
             // TODO add your handling code here:
-            Createcontact createdetail = new Createcontact();
-            createdetail.setName(nameTextField.getText());
-            createdetail.setDetails(txtDetail.getText());
-            SuperConnection.saveEntity(createdetail);
-            JOptionPane.showMessageDialog(this, "SAVED SUCCESSFULLY.");
+            if (nameTextField.getText().length()!=0 && txtDetail.getText().length()!=0) {
+                Createcontact createdetail = new Createcontact();
+                createdetail.setName(nameTextField.getText());
+                createdetail.setDetails(txtDetail.getText());
+                SuperConnection.saveEntity(createdetail);
+                JOptionPane.showMessageDialog(this, "SAVED SUCCESSFULLY."+" AND SAVING ID :"+createdetail.getId()+"");
+            } else {
+                JOptionPane.showMessageDialog(this, "FIELD IS BLANK");
+            }
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "PLEASE STARTUP THE DATABASE CONNECTION.");
         }

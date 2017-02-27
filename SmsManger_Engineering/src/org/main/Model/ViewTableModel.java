@@ -16,8 +16,8 @@ import org.main.pojo.Contactinfo;
  */
 public class ViewTableModel implements TableModel {
 
-    private String columnsName[] = {"#", "Name", "Contact"};
-    private Class columnsClass[] = {String.class, String.class, String.class};
+    private String columnsName[] = {"#", "Name", "Contact", "email"};
+    private Class columnsClass[] = {String.class, String.class, String.class, String.class};
     private ArrayList<Contactinfo> arraylist;
 
     public ViewTableModel(ArrayList<Contactinfo> arraylist) {
@@ -60,8 +60,10 @@ public class ViewTableModel implements TableModel {
                 return get.getName();
             case 2:
                 return get.getContact();
+            case 3:
+                return get.getEmailId();
         }
-        return get;
+        return null;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.main.controller;
+package org.main.controller;
 
 import java.util.Properties;
 import javax.swing.JDialog;

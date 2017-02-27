@@ -5,21 +5,16 @@
  */
 package org.main.view;
 
-import com.main.controller.CsvReader;
-import com.main.controller.SendSMS;
-import java.awt.Component;
-import java.awt.event.ActionEvent;
+import org.main.controller.SendSMS;
+import org.main.controller.TableSetting;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.text.JTextComponent;
 import org.main.Model.ComboModel;
-import org.main.Model.LoadTabelModel;
 import org.main.Model.ViewTableModel;
 import org.main.dto.DTOSetter;
 import org.main.pojo.Contactinfo;
@@ -32,12 +27,15 @@ import org.main.util.SuperConnection;
  */
 public class MainFrame extends javax.swing.JFrame {
 
+    ArrayList<DTOSetter> list = new ArrayList<DTOSetter>();
+
     /**
      * Creates new form SmsFrame
      */
     public MainFrame() {
         initComponents();
         viewTableModel();
+        loadTemplateCombo();
         loadCombo();
 
     }
@@ -52,32 +50,34 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        panelFrame = new javax.swing.JPanel();
         panelMain = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        txtBranch = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtYear = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtCollege = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtEmailID = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtContact = new javax.swing.JTextField();
+        cmbYear = new javax.swing.JComboBox<>();
+        cmbBranch = new javax.swing.JComboBox<>();
+        cmbCollege = new javax.swing.JComboBox<>();
         Panelsub = new javax.swing.JPanel();
         cmbTemplate = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        viewTable = new javax.swing.JTable();
         sendButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
         buttonReset = new javax.swing.JButton();
         searchButton = new javax.swing.JButton();
         createButton = new javax.swing.JButton();
-        jProgressBar1 = new javax.swing.JProgressBar();
         btnReload = new javax.swing.JButton();
+        labDisplayMessage = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        btnClose = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        viewTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SMS MANAGER FOR ENGINEERING STUDENTS");
@@ -86,8 +86,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 103, 127));
 
-        jPanel2.setBackground(new java.awt.Color(0, 146, 188));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SMS MANAGER ", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Verdana", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        panelFrame.setBackground(new java.awt.Color(0, 146, 188));
+        panelFrame.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SMS MANAGER ", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Verdana", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
 
         panelMain.setBackground(new java.awt.Color(0, 107, 166));
         panelMain.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(74, 69, 104), 1, true));
@@ -103,22 +103,13 @@ public class MainFrame extends javax.swing.JFrame {
         txtName.setText(" ");
         txtName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(74, 69, 104)));
 
-        txtBranch.setText(" ");
-        txtBranch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(74, 69, 104)));
-
         jLabel5.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("YEAR :");
 
-        txtYear.setText(" ");
-        txtYear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(74, 69, 104)));
-
         jLabel6.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("COLLEGE :");
-
-        txtCollege.setText(" ");
-        txtCollege.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(74, 69, 104)));
 
         jLabel7.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -134,6 +125,12 @@ public class MainFrame extends javax.swing.JFrame {
         txtContact.setText(" ");
         txtContact.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(74, 69, 104)));
 
+        cmbYear.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+        cmbBranch.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+        cmbCollege.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
         javax.swing.GroupLayout panelMainLayout = new javax.swing.GroupLayout(panelMain);
         panelMain.setLayout(panelMainLayout);
         panelMainLayout.setHorizontalGroup(
@@ -141,20 +138,27 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(panelMainLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBranch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtYear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEmailID, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtContact, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCollege, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelMainLayout.createSequentialGroup()
+                        .addGroup(panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelMainLayout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addGroup(panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1)))
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtName)
+                            .addComponent(cmbYear, 0, 194, Short.MAX_VALUE)
+                            .addComponent(cmbCollege, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmbBranch, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtContact, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(panelMainLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtEmailID, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelMainLayout.setVerticalGroup(
@@ -167,47 +171,58 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbBranch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCollege, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(cmbCollege, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEmailID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(txtEmailID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
                 .addGroup(panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtContact, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                    .addComponent(txtContact, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         Panelsub.setBackground(new java.awt.Color(0, 107, 166));
         Panelsub.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(74, 69, 104), 1, true));
 
         cmbTemplate.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        cmbTemplate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
+        cmbTemplate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "----" }));
+        cmbTemplate.setBorder(null);
         cmbTemplate.setOpaque(false);
+        cmbTemplate.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbTemplateItemStateChanged(evt);
+            }
+        });
+        cmbTemplate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTemplateActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("CHOOSE TEMPLATE :-");
+        jLabel3.setText("CHOOSE TEMPLATE :");
 
         javax.swing.GroupLayout PanelsubLayout = new javax.swing.GroupLayout(Panelsub);
         Panelsub.setLayout(PanelsubLayout);
         PanelsubLayout.setHorizontalGroup(
             PanelsubLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelsubLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(4, 4, 4)
                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cmbTemplate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
         PanelsubLayout.setVerticalGroup(
             PanelsubLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,25 +234,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(16, 16, 16))
         );
 
-        jScrollPane1.setBackground(new java.awt.Color(144, 12, 63));
-
-        viewTable.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(33, 97, 140), 1, true));
-        viewTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(viewTable);
-
         sendButton.setBackground(new java.awt.Color(124, 133, 149));
         sendButton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        sendButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/blue-mail-send-icon.png"))); // NOI18N
+        sendButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/Outbox-icon.png"))); // NOI18N
         sendButton.setText("SEND");
         sendButton.setBorder(null);
         sendButton.addActionListener(new java.awt.event.ActionListener() {
@@ -248,7 +247,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         saveButton.setBackground(new java.awt.Color(124, 133, 149));
         saveButton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/Device-Floppy-icon.png"))); // NOI18N
+        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/Inbox-icon.png"))); // NOI18N
         saveButton.setText("SAVE");
         saveButton.setBorder(null);
         saveButton.addActionListener(new java.awt.event.ActionListener() {
@@ -259,7 +258,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         buttonReset.setBackground(new java.awt.Color(124, 133, 149));
         buttonReset.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        buttonReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/refresh-icon.png"))); // NOI18N
+        buttonReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/Clear-icon.png"))); // NOI18N
         buttonReset.setText("RESET");
         buttonReset.setBorder(null);
         buttonReset.addActionListener(new java.awt.event.ActionListener() {
@@ -270,13 +269,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         searchButton.setBackground(new java.awt.Color(124, 133, 149));
         searchButton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/search.png"))); // NOI18N
+        searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/Search-icon.png"))); // NOI18N
         searchButton.setText("SEARCH");
         searchButton.setBorder(null);
 
         createButton.setBackground(new java.awt.Color(124, 133, 149));
         createButton.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        createButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/Actions-contact-new-icon.png"))); // NOI18N
+        createButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/Compose-icon.png"))); // NOI18N
         createButton.setText("CREATE");
         createButton.setBorder(null);
         createButton.addActionListener(new java.awt.event.ActionListener() {
@@ -287,6 +286,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         btnReload.setBackground(new java.awt.Color(124, 133, 149));
         btnReload.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        btnReload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/FirefoxBeta-icon.png"))); // NOI18N
         btnReload.setText("RELOAD");
         btnReload.setBorder(null);
         btnReload.addActionListener(new java.awt.event.ActionListener() {
@@ -295,56 +295,89 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        labDisplayMessage.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+        btnClose.setBackground(new java.awt.Color(124, 133, 149));
+        btnClose.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/main/icon/Delete-icon.png"))); // NOI18N
+        btnClose.setText("CLOSE");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
+
+        viewTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(viewTable);
+
+        javax.swing.GroupLayout panelFrameLayout = new javax.swing.GroupLayout(panelFrame);
+        panelFrame.setLayout(panelFrameLayout);
+        panelFrameLayout.setHorizontalGroup(
+            panelFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Panelsub, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(labDisplayMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnReload, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelFrameLayout.createSequentialGroup()
+                        .addGroup(panelFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Panelsub, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2))
+                    .addGroup(panelFrameLayout.createSequentialGroup()
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnReload, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonReset, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonReset, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(createButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(sendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, 0))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        panelFrameLayout.setVerticalGroup(
+            panelFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFrameLayout.createSequentialGroup()
+                .addGroup(panelFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelFrameLayout.createSequentialGroup()
+                        .addComponent(panelMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Panelsub, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(buttonReset, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(createButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(sendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGap(8, 8, 8)
-                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnReload, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addGroup(panelFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelFrameLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(labDisplayMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonReset, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(createButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnReload, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -353,14 +386,14 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -387,14 +420,19 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             Contactinfo untitled = new Contactinfo();
-            untitled.setName(txtName.getText());
-            untitled.setBranch(txtBranch.getText());
-            untitled.setCollege(txtCollege.getText());
-            untitled.setEmailId(txtEmailID.getText());
-            untitled.setYear(txtYear.getText());
-            untitled.setContact(txtBranch.getText());
-            SuperConnection.saveEntity(untitled);
-            JOptionPane.showMessageDialog(this, "SAVED SUCCESSFULLY.");
+            if (txtName.getText().length() != 0 && txtEmailID.getText().length() != 0 && txtContact.getText().length() != 0 && cmbBranch.getSelectedIndex() != 0 && cmbCollege.getSelectedIndex() != 0 && cmbYear.getSelectedIndex() != 0) {
+                untitled.setName(txtName.getText());
+                untitled.setBranch(cmbBranch.getSelectedItem().toString().trim());
+                untitled.setCollege(cmbCollege.getSelectedItem().toString().trim());
+                untitled.setEmailId(txtEmailID.getText());
+                untitled.setYear(cmbYear.getSelectedItem().toString().trim());
+                untitled.setContact(txtContact.getText());
+                SuperConnection.saveEntity(untitled);
+                JOptionPane.showMessageDialog(this, "SAVED SUCCESSFULLY." + "Your ID : " + untitled.getId() + "");
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Fill the Data");
+            }
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "PLEASE STARTUP THE DATABASE CONNECTION");
@@ -404,34 +442,25 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void buttonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonResetActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Do really want to reset data ?");
-        if (JOptionPane.OK_OPTION == 0) {
-            Component[] components = panelMain.getComponents();
-            for (Component component : components) {
-                if (component instanceof JTextField || component instanceof JTextArea) {
-                    JTextComponent specificObject = (JTextComponent) component;
-                    specificObject.setText(" ");
-                }
-            }
-            Component[] components1 = Panelsub.getComponents();
-            for (Component component : components) {
-                if (component instanceof JTextField || component instanceof JTextArea) {
-                    JTextComponent specificObject = (JTextComponent) component;
-                    specificObject.setText(" ");
-                }
-            }
-            JOptionPane.showMessageDialog(this, "DATA RESET SUCCESSFULLY..");
-        }
+        txtContact.setText(" ");
+        txtEmailID.setText(" ");
+        txtName.setText(" ");
+        cmbBranch.setSelectedIndex(0);
+        cmbCollege.setSelectedIndex(0);
+//        cmbTemplate.setSelectedIndex(0);
+        cmbYear.setSelectedIndex(0);
     }//GEN-LAST:event_buttonResetActionPerformed
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
         try {
             // TODO add your handling code here:
-            Createcontact selectedItem = (Createcontact) cmbTemplate.getSelectedItem();
-            System.out.println("selectedItem = " + selectedItem.getName());
-            
-            SendSMS.send(txtContact.getText().trim(), selectedItem.getDetails());
-            
-            JOptionPane.showMessageDialog(this, "SENT SUCCESSFULLY.");
+            if (cmbTemplate.getSelectedIndex() != 0) {
+                ComboModel comboModel = (ComboModel) cmbTemplate.getModel();
+                Createcontact selectedObjectItem = comboModel.getSelectedObjectItem();
+                SendSMS.send(txtContact.getText().trim(), selectedObjectItem.getDetails());
+                JOptionPane.showMessageDialog(this, "SENT SUCCESSFULLY.");
+            } else {
+                JOptionPane.showMessageDialog(this, "PLEASE SELECT THE TEMPLETE");
+            }
         } catch (Exception ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -439,9 +468,27 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadActionPerformed
         // TODO add your handling code here:
-        loadCombo();
-        viewTableModel();
+        loadTemplateCombo();
+//        viewTableModel();
     }//GEN-LAST:event_btnReloadActionPerformed
+
+    private void cmbTemplateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTemplateActionPerformed
+//        ComboModel comboModel = (ComboModel) cmbTemplate.getModel();
+//        Createcontact selectedObjectItem = comboModel.getSelectedObjectItem();
+//        JOptionPane.showMessageDialog(this, selectedObjectItem.getDetails().trim(), "Template Subject", JOptionPane.INFORMATION_MESSAGE, null);
+    }//GEN-LAST:event_cmbTemplateActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void cmbTemplateItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTemplateItemStateChanged
+        // TODO add your handling code here:
+        ComboModel comboModel = (ComboModel) cmbTemplate.getModel();
+        Createcontact selectedObjectItem = comboModel.getSelectedObjectItem();
+        JOptionPane.showMessageDialog(this, selectedObjectItem.getDetails().trim(), "Template Subject", JOptionPane.INFORMATION_MESSAGE, null);
+    }//GEN-LAST:event_cmbTemplateItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -481,9 +528,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panelsub;
+    private javax.swing.JButton btnClose;
     private javax.swing.JButton btnReload;
     private javax.swing.JButton buttonReset;
+    private javax.swing.JComboBox<String> cmbBranch;
+    private javax.swing.JComboBox<String> cmbCollege;
     private javax.swing.JComboBox<String> cmbTemplate;
+    private javax.swing.JComboBox<String> cmbYear;
     private javax.swing.JButton createButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -493,19 +544,17 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labDisplayMessage;
+    private javax.swing.JPanel panelFrame;
     private javax.swing.JPanel panelMain;
     private javax.swing.JButton saveButton;
     private javax.swing.JButton searchButton;
     private javax.swing.JButton sendButton;
-    private javax.swing.JTextField txtBranch;
-    private javax.swing.JTextField txtCollege;
     private javax.swing.JTextField txtContact;
     private javax.swing.JTextField txtEmailID;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtYear;
     private javax.swing.JTable viewTable;
     // End of variables declaration//GEN-END:variables
 
@@ -513,31 +562,76 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             List<Contactinfo> listEntity = SuperConnection.listEntity(new Contactinfo());
             viewTable.setModel(new ViewTableModel((ArrayList<Contactinfo>) listEntity));
-            String inputString = new CsvReader().Read();
-            System.out.println("inputString = " + inputString);
-            String[] strings = inputString.split("\n");
-            ArrayList<DTOSetter> list = new ArrayList<DTOSetter>();
-            for (int i = 0; i < strings.length; i++) {
-                String[] string = strings[i].split(",");
-                String name = string[0];
-                String email = string[1];
-                String contact = string[2];
-                DTOSetter setter = new DTOSetter(name, email, contact);
-                list.add(setter);
-            }
-            viewTable.setModel(new LoadTabelModel(list));
+            TableSetting.setTable(viewTable);
+//            String inputString = new CsvReader().Read();
+//            System.out.println("inputString = " + inputString);
+//            String[] strings = inputString.split("\n");
+//            ArrayList<DTOSetter> list = new ArrayList<DTOSetter>();
+//            for (int i = 0; i < strings.length; i++) {
+//                String[] string = strings[i].split(",");
+//                String name = string[0];
+//                String email = string[1];
+//                String contact = string[2];
+//                Contactinfo contactinfo = new Contactinfo();
+//                contactinfo.setName(name);
+//                contactinfo.setContact(contact);
+//                contactinfo.setEmailId(email);
+//                SuperConnection.saveEntity(contactinfo);
+//                DTOSetter setter = new DTOSetter(name, email, contact);
+//                list.add(setter);
+//            }
+//            viewTable.setModel(new LoadTabelModel(list));
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "DATA BASE CONNECTION IS NOT PROPERLY WORKING.");
         }
     }
 
-    private void loadCombo() {
+    private void loadTemplateCombo() {
         try {
             List<Createcontact> listEntity = SuperConnection.listEntity(new Createcontact());
             cmbTemplate.setModel(new ComboModel((ArrayList<Createcontact>) listEntity));
         } catch (Exception ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void loadCombo() {
+        cmbBranch.addItem("----");
+        cmbYear.addItem("----");
+        cmbCollege.addItem("----");
+        HashSet<String> branchHashSet = new HashSet<String>();
+        HashSet<String> yearHashSet = new HashSet<String>();
+        HashSet<String> collegeHashSet = new HashSet<String>();
+        try {
+            List<Contactinfo> listEntity = SuperConnection.listEntity(new Contactinfo());
+            for (Contactinfo contactinfo : listEntity) {
+                branchHashSet.add(contactinfo.getBranch());
+                yearHashSet.add(contactinfo.getYear());
+                collegeHashSet.add(contactinfo.getCollege());
+            }
+
+            for (String string : branchHashSet) {
+                if (string != null) {
+                    cmbBranch.addItem(string);
+                }
+            }
+
+            for (String string : yearHashSet) {
+                if (string != null) {
+                    cmbYear.addItem(string);
+                }
+            }
+
+            for (String string : collegeHashSet) {
+                if (string != null) {
+                    cmbCollege.addItem(string);
+                }
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }
